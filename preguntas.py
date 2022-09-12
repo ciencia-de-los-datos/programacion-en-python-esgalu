@@ -11,7 +11,15 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import pandas as pd
+import os
 
+path = os.path.join('data.csv')
+df = pd.read_csv(
+    path,
+    sep='\t',
+    names=['category', 'values', 'date', 'category_list', 'dictionary']
+)
 
 def pregunta_01():
     """
@@ -21,7 +29,9 @@ def pregunta_01():
     214
 
     """
-    return
+    result = df['values'].sum()
+
+    return result
 
 
 def pregunta_02():
