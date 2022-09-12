@@ -2,7 +2,7 @@
 Calificación del laboratorio
 -----------------------------------------------------------------------------------------
 """
-
+import pandas as pd
 import sys
 import preguntas
 
