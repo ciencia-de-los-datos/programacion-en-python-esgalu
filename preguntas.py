@@ -11,6 +11,8 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+pip install pandas -t python 
+
 import pandas as pd
 import os
 
