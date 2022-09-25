@@ -11,7 +11,11 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-pip install pandas -t python 
+import csv
+
+with open("data.csv", newline='') as f:
+    datos=csv.reader(f,delimiter="\t")
+    data=list(datos)
 
 
 
@@ -23,16 +27,7 @@ def pregunta_01():
     214
 
     """
-    import pandas as pd
-    import os
-
-    path = os.path.join('data.csv')
-    df = pd.read_csv(
-        path,
-        sep='\t',
-        names=['category', 'values', 'date', 'category_list', 'dictionary']
-    )
-    result = df['values'].sum()
+    result = sum([int(data[index][1]) for index in range(len(data))])
 
     return result
 
