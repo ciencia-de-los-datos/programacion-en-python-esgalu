@@ -11,12 +11,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-import csv
-
-with open("data.csv", newline='') as f:
-    datos=csv.reader(f,delimiter="\t")
-    data=list(datos)
-
 
 
 def pregunta_01():
@@ -27,6 +21,12 @@ def pregunta_01():
     214
 
     """
+    import csv
+
+    with open("data.csv", newline='') as f:
+        datos=csv.reader(f,delimiter="\t")
+        data=list(datos)
+
     result = sum([int(data[index][1]) for index in range(len(data))])
 
     return result
