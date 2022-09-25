@@ -288,10 +288,15 @@ def pregunta_08():
     data = [
         [
             int(var),
-            list(set([data[index][0] for index in range(len(data)) if data[index][1] == var]))
+            set([data[index][0] for index in range(len(data)) if data[index][1] == var])
         ]
         for var in variables
     ]
+
+    data = [
+        [value[0], sorted([*value[1]])] for value in data
+    ]
+
     data = sorted(data, key=lambda x: x[0])
 
     return [tuple(value) for value in data]
@@ -339,7 +344,7 @@ def pregunta_09():
 
     data = sorted(data, key=lambda x: x[0])
     
-    return [tuple(value) for value in data]
+    return dict(data)
 
 
 def pregunta_10():
