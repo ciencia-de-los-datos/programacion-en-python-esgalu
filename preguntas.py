@@ -47,7 +47,18 @@ def pregunta_02():
     ]
 
     """
-    return
+    
+    import csv
+
+    with open("data.csv", newline='') as f:
+        datos=csv.reader(f,delimiter="\t")
+        data=list(datos)
+
+    data = [(data[index][0:2]) for index in range(len(data))]
+    variables = set([(data[index][0]) for index in range(len(data))])
+    data = {var: len([data[index][0] for index in range(len(data)) if data[index][0] == var]) for var in variables}
+    
+    return sorted(data.items())
 
 
 def pregunta_03():
@@ -65,7 +76,18 @@ def pregunta_03():
     ]
 
     """
-    return
+    
+    import csv
+
+    with open("data.csv", newline='') as f:
+        datos=csv.reader(f,delimiter="\t")
+        data=list(datos)
+
+    data = [(data[index][0:2]) for index in range(len(data))]
+    variables = set([(data[index][0]) for index in range(len(data))])
+    data = {var: sum([int(data[index][1]) for index in range(len(data)) if data[index][0] == var]) for var in variables}
+
+    return sorted(data.items())
 
 
 def pregunta_04():
