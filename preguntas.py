@@ -121,9 +121,8 @@ def pregunta_04():
     data = [(data[index][2][5:7]) for index in range(len(data))]
     variables = set(data)
     data = {var: len([data[index][1] for index in range(len(data)) if data[index] == var]) for var in variables}
-    sorted(data.items())
     
-    return
+    return sorted(data.items())
 
 
 def pregunta_05():
