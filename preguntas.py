@@ -21,7 +21,15 @@ def pregunta_01():
     214
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        datos=csv.reader(f,delimiter="\t")
+        data=list(datos)
+
+    result = sum([int(data[index][1]) for index in range(len(data))])
+
+    return result
 
 
 def pregunta_02():
@@ -39,7 +47,18 @@ def pregunta_02():
     ]
 
     """
-    return
+    
+    import csv
+
+    with open("data.csv", newline='') as f:
+        datos=csv.reader(f,delimiter="\t")
+        data=list(datos)
+
+    data = [(data[index][0:2]) for index in range(len(data))]
+    variables = set([(data[index][0]) for index in range(len(data))])
+    data = {var: len([data[index][0] for index in range(len(data)) if data[index][0] == var]) for var in variables}
+    
+    return sorted(data.items())
 
 
 def pregunta_03():
@@ -57,7 +76,18 @@ def pregunta_03():
     ]
 
     """
-    return
+    
+    import csv
+
+    with open("data.csv", newline='') as f:
+        datos=csv.reader(f,delimiter="\t")
+        data=list(datos)
+
+    data = [(data[index][0:2]) for index in range(len(data))]
+    variables = set([(data[index][0]) for index in range(len(data))])
+    data = {var: sum([int(data[index][1]) for index in range(len(data)) if data[index][0] == var]) for var in variables}
+
+    return sorted(data.items())
 
 
 def pregunta_04():
@@ -82,7 +112,17 @@ def pregunta_04():
     ]
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        datos=csv.reader(f,delimiter="\t")
+        data=list(datos)
+
+    data = [(data[index][2][5:7]) for index in range(len(data))]
+    variables = set(data)
+    data = {var: len([data[index][1] for index in range(len(data)) if data[index] == var]) for var in variables}
+    
+    return sorted(data.items())
 
 
 def pregunta_05():
@@ -100,7 +140,28 @@ def pregunta_05():
     ]
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        datos=csv.reader(f,delimiter="\t")
+        data=list(datos)
+
+    data = [(data[index][0:2]) for index in range(len(data))]
+    variables = set([(data[index][0]) for index in range(len(data))])
+    data = [
+        [
+            var, 
+            max(
+                [int(data[index][1]) for index in range(len(data)) if data[index][0] == var]
+            ),
+            min(
+                [int(data[index][1]) for index in range(len(data)) if data[index][0] == var]
+            )
+        ] for var in variables
+    ]
+    data = sorted(data, key=lambda x: x[0])
+
+    return [tuple(value) for value in data]
 
 
 def pregunta_06():
@@ -125,7 +186,32 @@ def pregunta_06():
     ]
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        data=csv.reader(f,delimiter="\t")
+        data=list(data)
+
+    data = [value[4] for value in data]
+    data = sum([l.split(',') for l in ','.join(data).split(',')], [])
+
+    variables = set([value[:3] for value in data])
+    data = [[value[:3], value[4:]] for value in data]
+
+    data = [
+        [
+            var, 
+            min(
+                [int(data[index][1]) for index in range(len(data)) if data[index][0] == var]
+            ),
+            max(
+                [int(data[index][1]) for index in range(len(data)) if data[index][0] == var]
+            )
+        ] for var in variables]
+
+    data = sorted(data, key=lambda x: x[0])
+
+    return [tuple(value) for value in data]
 
 
 def pregunta_07():
@@ -149,7 +235,23 @@ def pregunta_07():
     ]
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        data=csv.reader(f,delimiter="\t")
+        data=list(data)
+
+    data = [(data[index][0:2]) for index in range(len(data))]
+    variables = set([(data[index][1]) for index in range(len(data))])
+    data = [
+        [
+            int(var),
+            [data[index][0] for index in range(len(data)) if data[index][1] == var]]
+        for var in variables
+    ]
+    data = sorted(data, key=lambda x: x[0])
+
+    return [tuple(value) for value in data]
 
 
 def pregunta_08():
@@ -174,7 +276,29 @@ def pregunta_08():
     ]
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        data=csv.reader(f,delimiter="\t")
+        data=list(data)
+
+    data = [(data[index][0:2]) for index in range(len(data))]
+    variables = set([(data[index][1]) for index in range(len(data))])
+    data = [
+        [
+            int(var),
+            set([data[index][0] for index in range(len(data)) if data[index][1] == var])
+        ]
+        for var in variables
+    ]
+
+    data = [
+        [value[0], sorted([*value[1]])] for value in data
+    ]
+
+    data = sorted(data, key=lambda x: x[0])
+
+    return [tuple(value) for value in data]
 
 
 def pregunta_09():
@@ -197,7 +321,29 @@ def pregunta_09():
     }
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        data=csv.reader(f,delimiter="\t")
+        data=list(data)
+
+    data = [value[4] for value in data]
+    data = sum([l.split(',') for l in ','.join(data).split(',')], [])
+
+    variables = set([value[:3] for value in data])
+    data = [[value[:3], value[4:]] for value in data]
+
+    data = [
+        [
+            var, 
+            len(
+                [int(data[index][1]) for index in range(len(data)) if data[index][0] == var]
+            )
+        ] for var in variables]
+
+    data = sorted(data, key=lambda x: x[0])
+    
+    return dict(data)
 
 
 def pregunta_10():
@@ -218,7 +364,20 @@ def pregunta_10():
 
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        data=csv.reader(f,delimiter="\t")
+        data=list(data)
+    data = [
+        [
+            data[index][0],
+            len(data[index][3].split(',')),
+            len(data[index][4].split(','))
+        ] for index in range(len(data))
+    ]
+    
+    return [tuple(value) for value in data]
 
 
 def pregunta_11():
@@ -239,7 +398,34 @@ def pregunta_11():
 
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        data=csv.reader(f,delimiter="\t")
+        data=list(data)
+
+    variables = set(
+        sum(
+            [
+                data[index][3].split(',')
+                for index in range(len(data))
+            ], []
+            )
+        )
+
+    data = {
+            var:
+            sum(
+                [
+                    int(data[index][1])
+                    for index in range(len(data))
+                    if var in data[index][3]
+                ]
+            )
+         for var in variables
+    }
+
+    return dict(sorted(data.items()))
 
 
 def pregunta_12():
@@ -257,4 +443,28 @@ def pregunta_12():
     }
 
     """
-    return
+    import csv
+
+    with open("data.csv", newline='') as f:
+        data=csv.reader(f,delimiter="\t")
+        data=list(data)
+
+    data = [
+        [
+            value[0],
+            [int(num[4:]) for num in value[4].split(',')]
+        ]
+    for value in data]
+    variables = set([value[0] for value in data])
+
+    data = {
+        var: sum(
+            sum(
+                [data[index][1] 
+                 for index in range(len(data)) 
+                 if data[index][0] == var], []
+            )
+        ) for var in variables
+    }
+    
+    return dict(sorted(data.items()))
